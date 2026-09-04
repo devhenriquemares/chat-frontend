@@ -1,3 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+
+@theme {
+    --background-color: #2B2B2B;
+    --color-white: #f0f0f0;
+    --color-purple: #7F33AB;
+    --color-ligth-purple: #A14AD4;
+    --color-dark-purple: #662B89;
+
+    --font-body: "AlanSans"
+}
+
+@font-face {
+    font-family: "AlanSans";
+    src: url(fonts/Alan_Sans/AlanSans-VariableFont_wght.ttf) format("truetype-variations");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+    font-family: var(--font-body);
+    padding: 0px;
+}
+
+body {
+    background-color: var(--background-color);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
