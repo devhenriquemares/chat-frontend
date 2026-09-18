@@ -4,21 +4,31 @@ import { NgClass } from "../../../../node_modules/@angular/common/types/_common_
 import { ChatCard } from '../../components/chat-card/chat-card';
 import { signal } from '@angular/core'; 
 import { Chat } from '../../components/chat/chat';
+import { NewChat } from '../../components/new-chat/new-chat';
+
+export type View = 'home' | 'chat' | 'new-chat';
 
 @Component({
   selector: 'home',
-  imports: [IconCircleButton, ChatCard, Chat],
+  imports: [IconCircleButton, ChatCard, Chat, NewChat],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class Home {
-    selectedID = signal<number | null>(null)
+    selectedView = signal<View>('home');
+    selectedID = signal<number | null>(null);
 
-    handleSelect(index: number) {
-        this.selectedID.set(index)
+    selectChat(chatID: number) {
+        this.selectedView.set('chat');
+        this.selectedID.set(chatID);
+    }
+
+    newChat() {
+        this.selectedView.set('new-chat');
     }
 
     handleCloseChat() {
+        this.selectedView.set('home');
         this.selectedID.set(null)
     }
 }

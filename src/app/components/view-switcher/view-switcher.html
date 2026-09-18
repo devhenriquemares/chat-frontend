@@ -1,0 +1,17 @@
+<div class="text-center text-4xl grid grid-cols-2 w-full">
+    <a [routerLink]="firstButtonRedirect()" class="self-end cursor-pointer" [ngClass]="isFirstPageSelected() ? 'text-white' : 'text-light-gray'">
+        {{ firstPageName() }} 
+    </a>
+    <a [routerLink]="secondButtonRedirect()" class="self-end cursor-pointer" [ngClass]="isFirstPageSelected() ? 'text-light-gray' : 'text-white'">
+        {{ secondPageName() }}
+    </a>
+    
+    <div class="block col-span-full mt-2 h-1 relative">
+        <div class="z-1 h-full absolute w-[50%]"
+            [ngClass]="isFirstPageSelected() ? 'bg-white' : 'bg-light-gray'">
+        </div>
+        <div class="bg-light-gray z-0 h-full absolute w-full"
+            [ngClass]="isFirstPageSelected() ? 'bg-light-gray' : 'bg-white'">
+        </div>
+    </div>
+</div>

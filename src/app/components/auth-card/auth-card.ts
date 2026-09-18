@@ -1,10 +1,11 @@
 import { Component, effect, input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { authRoutes } from '../../pages/auth/auth.routes';
+import { ViewSwitcher } from '../view-switcher/view-switcher';
 
 @Component({
   selector: 'auth-card',
-  imports: [RouterLink],
+  imports: [ViewSwitcher],
   templateUrl: './auth-card.html',
   styleUrl: './auth-card.css',
 })

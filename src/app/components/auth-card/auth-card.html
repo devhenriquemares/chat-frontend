@@ -35,25 +35,7 @@
             </div>
         </div>
         <form class="w-[85%] h-full flex flex-col z-1">
-            <div class="flex-1 grid grid-cols-2 text-center text-4xl">
-                <a routerLink="/auth/register" class="self-end cursor-pointer"
-                    [class.text-white]="isRegisterPage"
-                    [class.text-light-gray]="!isRegisterPage"> Register </a>
-                <a routerLink="/auth/login" class="self-end cursor-pointer"
-                    [class.text-white]="!isRegisterPage"
-                    [class.text-light-gray]="isRegisterPage"> Login </a>
-
-                <div class="block col-span-full mt-2 h-1 relative">
-                    <div class="z-1 h-full absolute w-[50%]"
-                        [class.bg-white]="isRegisterPage"
-                        [class.bg-light-gray]="!isRegisterPage">
-                    </div>
-                    <div class="bg-light-gray z-0 h-full absolute w-full"
-                        [class.bg-white]="!isRegisterPage"
-                        [class.bg-light-gray]="isRegisterPage">
-                    </div>
-                </div>
-            </div>
+            <view-switcher class="flex-1" firstButtonRedirect="/auth/register" secondButtonRedirect="/auth/login" firstPageName="Register" secondPageName="Login" [isFirstPageSelected]="isRegisterPage"/>
             <div class="flex flex-3 flex-col justify-evenly">
                 <ng-content></ng-content>
             </div>
