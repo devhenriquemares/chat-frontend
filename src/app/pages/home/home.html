@@ -1,0 +1,14 @@
+<div class="flex h-full w-full">
+    <div class="w-120 h-full bg-dark-purple relative
+        shadow-[10px_0px_10px_0px_rgba(0,0,0,.2)]">
+        <div class="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-light-purple flex-1 p-5 flex flex-col gap-5"></div>
+        <icon-circle-button iconSrc="/icons/add_chat_ic.svg" class="absolute bottom-0 right-0" buttonCustomClass="hover:bg-light-purple mr-3 mb-5"/>
+    </div>    
+    <div class="h-full flex-1 flex">
+        @if (selectedID() === null) {
+            <img src="./icons/home_background_ic.svg" class="h-[75%] self-center m-auto"/>
+        } @else {
+            <chat [chatID]="selectedID()!" class="w-full h-full" (closeChatEmitter)="handleCloseChat()"/>
+        }
+    </div>
+</div>

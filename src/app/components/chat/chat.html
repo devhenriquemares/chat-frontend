@@ -1,0 +1,15 @@
+<div class="w-full h-full flex flex-col">
+    <div class="bg-light-purple w-full flex items-center pl-5 gap-5">
+        <icon-circle-button iconSrc="/icons/back_ic.svg" buttonCustomClass="shadow-none hover:shadow-none hover:translate-y-0" (click)="closeChat()"/>
+        <p class="text-4xl text-white">Nome do usuário</p>
+    </div>
+    <div class="flex-1 w-full overflow-y-scroll scrollbar-thumb-light-purple scrollbar-thin px-5 py-8 flex flex-col gap-3"></div>
+    <div class="bg-gray w-full py-5 px-7 flex gap-5 items-center">
+        <app-input class="flex-1" placeholder="Digite uma mensagem" type="text"
+            customClass="bg-white
+                placeholder:text-[rgba(0,0,0,.4)]
+                rounded-xl text-black
+                wrap-break-word text-3xl"/>
+        <icon-circle-button iconSrc="./icons/send_ic.svg" buttonCustomClass="h-18 w-18 hover:bg-light-purple hover:translate-y-0"/>
+    </div>
+</div>

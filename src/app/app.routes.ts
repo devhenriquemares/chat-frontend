@@ -1,9 +1,15 @@
 import { Routes } from '@angular/router';
-import { RegisterComponent } from './pages/auth/register/register';
+import { Register } from './pages/auth/register/register';
+import { authRoutes } from './pages/auth/auth.routes';
+import { Home } from './pages/home/home';
 
 export const routes: Routes = [
     {
-        path: 'auth/register',
-        component: RegisterComponent
+        path: 'auth',
+        children: authRoutes
+    },
+    {
+        path: 'home',
+        component: Home
     }
 ];

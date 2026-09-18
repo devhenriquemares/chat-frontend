@@ -6,23 +6,27 @@
     --background-color: #2B2B2B;
     --color-white: #f0f0f0;
     --color-purple: #7F33AB;
-    --color-ligth-purple: #A14AD4;
+    --color-light-purple: #A14AD4;
     --color-dark-purple: #662B89;
-
+    --color-light-gray: #989898;
+    --color-gray: #414141;
+    
     --font-body: "AlanSans"
 }
 
 @font-face {
     font-family: "AlanSans";
-    src: url(fonts/Alan_Sans/AlanSans-VariableFont_wght.ttf) format("truetype-variations");
+    src: url(/fonts/Alan_Sans/AlanSans-VariableFont_wght.ttf) format("truetype-variations");
     font-weight: 100 900;
     font-style: normal;
     font-display: swap;
 }
 
-* {
-    font-family: var(--font-body);
-    padding: 0px;
+@layer base {
+    * {
+        font-family: var(--font-body);
+        padding: 0px;
+    }
 }
 
 body {

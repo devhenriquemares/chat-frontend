@@ -1,0 +1,7 @@
+<button class="w-full rounded-2xl p-2 pl-5 text-white cursor-pointer text-start transition duration-500"
+    (click)="select.emit()"
+    [class.bg-gray]="!selected()"
+    [class.bg-light-purple]="selected()">
+    <p class="text-2xl text-wrap wrap-break-word">{{ username() }}</p>
+    <p class="text-2xs ml-3 opacity-50 overflow-hidden">{{ lastMessage() }}</p>
+</button>

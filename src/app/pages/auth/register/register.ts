@@ -1,10 +1,23 @@
 import { Component } from '@angular/core';
-import { Input } from '../../../components/input/input';
+import { AuthCard } from '../../../components/auth-card/auth-card';
+import { FormInput } from '../../../components/form-input/form-input';
+
+interface RegisterErrors {
+    username: string | null,
+    email: string | null,
+    password: string | null
+}
 
 @Component({
   selector: 'app-register',
-  imports: [Input],
+  imports: [AuthCard, FormInput],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })
-export class RegisterComponent {}
+export class Register {
+    errors: RegisterErrors = {
+        username: null,
+        email: null,
+        password: null
+    }
+}

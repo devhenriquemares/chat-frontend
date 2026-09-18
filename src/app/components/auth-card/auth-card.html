@@ -1,0 +1,77 @@
+<div class="w-full h-full flex justify-center items-center">
+    <div class="
+        w-[85%] h-[85%] bg-purple rounded-[25px] relative overflow-hidden justify-center items-center flex
+    ">
+        <div class="z-0">
+            <div class="
+                h-70 w-70 bg-(--background-color)
+                rounded-full
+                absolute right-0 top-0
+                translate-x-[30%] translate-y-[-45%]
+                shadow-xl/30">
+            </div>
+            <div class="
+                h-45 w-45 bg-light-purple
+                rounded-full
+                absolute right-0 top-0
+                translate-x-[40%]
+                shadow-2xl/30">
+            </div>
+        </div>
+        <div class="z-0">
+            <div class="
+                h-70 w-70 bg-(--background-color)
+                rounded-full
+                absolute left-0 bottom-0
+                translate-y-[60%]
+                shadow-[0px_-25px_50px_-12px_rgba(0,0,0,0.25)]">
+            </div>
+            <div class="
+                h-45 w-45 bg-light-purple
+                rounded-full
+                absolute left-0 bottom-0
+                translate-x-[-20%] translate-y-[20%]
+                shadow-[0px_-25px_50px_-12px_rgba(0,0,0,0.25)]">
+            </div>
+        </div>
+        <form class="w-[85%] h-full flex flex-col z-1">
+            <div class="flex-1 grid grid-cols-2 text-center text-4xl">
+                <a routerLink="/auth/register" class="self-end cursor-pointer"
+                    [class.text-white]="isRegisterPage"
+                    [class.text-light-gray]="!isRegisterPage"> Register </a>
+                <a routerLink="/auth/login" class="self-end cursor-pointer"
+                    [class.text-white]="!isRegisterPage"
+                    [class.text-light-gray]="isRegisterPage"> Login </a>
+
+                <div class="block col-span-full mt-2 h-1 relative">
+                    <div class="z-1 h-full absolute w-[50%]"
+                        [class.bg-white]="isRegisterPage"
+                        [class.bg-light-gray]="!isRegisterPage">
+                    </div>
+                    <div class="bg-light-gray z-0 h-full absolute w-full"
+                        [class.bg-white]="!isRegisterPage"
+                        [class.bg-light-gray]="isRegisterPage">
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-3 flex-col justify-evenly">
+                <ng-content></ng-content>
+            </div>
+            <div class="flex-1">
+                <button type="submit" class="bg-gray text-white 
+                        w-full p-3  text-5xl
+                        rounded-full
+                        cursor-pointer
+                        hover:shadow-[0_0_15px_10px_rgba(0,0,0,.1)]
+                        hover:bg-light-purple
+                        transition duration-500">
+                    @if (isRegisterPage) {
+                        Register
+                    } @else {
+                        Login
+                    }
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

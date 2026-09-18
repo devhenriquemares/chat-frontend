@@ -1,42 +1,5 @@
-<div class="w-full h-full flex justify-center items-center">
-    <div class="
-        w-[90%] h-[90%] bg-purple rounded-[25px] relative overflow-hidden justify-center items-center flex">
-        <div>
-            <div class="
-                h-70 w-70 bg-(--background-color)
-                rounded-full
-                absolute right-0 top-0
-                translate-x-[30%] translate-y-[-45%]
-                shadow-xl/30">
-            </div>
-            <div class="
-                h-45 w-45 bg-ligth-purple
-                rounded-full
-                absolute right-0 top-0
-                translate-x-[40%]
-                shadow-2xl/30">
-            </div>
-        </div>
-        <div>
-            <div class="
-                h-70 w-70 bg-(--background-color)
-                rounded-full
-                absolute left-0 bottom-0
-                translate-y-[60%]
-                shadow-[0px_-25px_50px_-12px_rgba(0,0,0,0.25)]">
-            </div>
-            <div class="
-                h-45 w-45 bg-ligth-purple
-                rounded-full
-                absolute left-0 bottom-0
-                translate-x-[-20%] translate-y-[20%]
-                shadow-[0px_-25px_50px_-12px_rgba(0,0,0,0.25)]">
-            </div>
-        </div>
-        <div class="w-full">
-            <app-input type="text"/>
-            <app-input type="email"/>
-            <app-input type="password"/>
-        </div>
-    </div>
-</div>
+<auth-card page="Register">
+    <form-input iconSrc="/icons/username_ic.svg" iconAlt="Username icon" type="text" placeholder="Username" [error]="errors.username"/>
+    <form-input iconSrc="/icons/email_ic.svg" iconAlt="Email icon" type="email" placeholder="Email" [error]="errors.email"/>
+    <form-input iconSrc="/icons/password_ic.svg" iconAlt="Password icon" type="password" placeholder="Password" [error]="errors.password"/>
+</auth-card>
