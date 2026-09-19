@@ -1,20 +1,32 @@
 import { NgClass } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+
+export type Options = "Left" | "Right"
 
 @Component({
 	selector: 'view-switcher',
-	imports: [NgClass, RouterLink],
+	imports: [NgClass],
 	templateUrl: './view-switcher.html',
 	styleUrl: './view-switcher.css',
 	host: {
-		class: 'grid'
+		class: 'grid w-full'
 	}
 })
 export class ViewSwitcher {
-	firstPageName = input.required<string>();
-	secondPageName = input.required<string>();
-	isFirstPageSelected = input.required<boolean>();
-	firstButtonRedirect = input.required<string>();
-	secondButtonRedirect = input.required<string>();
+    optionSelected = input.required<Options>();
+
+	leftOption = input.required<string>();
+	rightOption = input.required<string>();
+
+    leftClickEmitter = output();
+    rightClickEmitter = output();
+
+    leftClick() {
+        this.leftClickEmitter.emit()
+    }
+
+    rightClick() {
+        this.rightClickEmitter.emit()
+    }
 }

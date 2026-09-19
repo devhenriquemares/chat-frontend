@@ -35,9 +35,16 @@
             </div>
         </div>
         <form class="w-[85%] h-full flex flex-col z-1">
-            <view-switcher class="flex-1" leftOption="Register" rightOption="Login" (leftClickEmitter)="handleLeftClick()" (rightClickEmitter)="handleRightClick()" [optionSelected]="optionSelected"/>
+            <view-switcher class="flex-1" leftOption="Register" rightOption="Login" (leftClickEmitter)="handleLeftClick()" (rightClickEmitter)="handleRightClick()" [optionSelected]="optionSelected()"/>
             <div class="flex flex-3 flex-col justify-evenly">
-                <ng-content></ng-content>
+                @if (optionSelected() === "Left") {
+                    <form-input iconSrc="/icons/username_ic.svg" iconAlt="Username icon" type="text" placeholder="Username" [error]="errors.username"/>
+                    <form-input iconSrc="/icons/email_ic.svg" iconAlt="Email icon" type="email" placeholder="Email" [error]="errors.email"/>
+                    <form-input iconSrc="/icons/password_ic.svg" iconAlt="Password icon" type="password" placeholder="Password" [error]="errors.password"/>
+                } @else {
+                    <form-input iconSrc="/icons/email_ic.svg" iconAlt="Email icon" type="email" placeholder="Email"/>
+                    <form-input iconSrc="/icons/password_ic.svg" iconAlt="Password icon" type="password" placeholder="Password"/>
+                }
             </div>
             <div class="flex-1">
                 <button type="submit" class="bg-gray text-white 
@@ -47,7 +54,7 @@
                         hover:shadow-[0_0_15px_10px_rgba(0,0,0,.1)]
                         hover:bg-light-purple
                         transition duration-500">
-                    {{ submitButtonText() }}
+                    {{ optionSelected() === "Left" ? 'Register' : 'Login' }}
                 </button>
             </div>
         </form>

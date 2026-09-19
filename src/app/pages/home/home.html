@@ -11,7 +11,7 @@
         } @else if (selectedView() === 'chat') {
             <chat [chatID]="selectedID()!" class="w-full h-full" (closeChatEmitter)="handleCloseChat()"/>
         } @else if (selectedView() === 'new-chat') {
-            <new-chat/>
+            <new-chat (closeViewEmmiter)="handleCloseNewChat()"/>
         }
     </div>
 </div>

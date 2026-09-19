@@ -1,7 +1,7 @@
-import { Component, effect, input } from '@angular/core';
+import { Component, effect, inject, input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { authRoutes } from '../../pages/auth/auth.routes';
-import { ViewSwitcher } from '../view-switcher/view-switcher';
+import { Options, ViewSwitcher } from '../view-switcher/view-switcher';
 
 @Component({
   selector: 'auth-card',
@@ -10,14 +10,15 @@ import { ViewSwitcher } from '../view-switcher/view-switcher';
   styleUrl: './auth-card.css',
 })
 export class AuthCard {
-    constructor() {
-        effect(() => {
-            if (this.page() === "Register") {
-                this.isRegisterPage = true
-            }
-        })
+    router = inject(Router)
+    submitButtonText = input.required<string>()
+    optionSelected: Options = "Left"
+
+    handleLeftClick() {
+        this.router.navigate(['/auth/register'])
     }
 
-    page = input.required<"Register" | "Login">()
-    isRegisterPage = false
+    handleRightClick() {
+        this.router.navigate(['/auth/login'])
+    }
 }

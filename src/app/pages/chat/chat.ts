@@ -1,7 +1,7 @@
 import { Component, input, output } from '@angular/core';
-import { IconCircleButton } from '../icon-circle-button/icon-circle-button';
-import { Input } from '../input/input';
-import { ChatMessage } from '../chat-message/chat-message';
+import { ChatMessage } from '../../components/chat-message/chat-message';
+import { IconCircleButton } from '../../components/icon-circle-button/icon-circle-button';
+import { Input } from '../../components/input/input';
 
 @Component({
   selector: 'chat',

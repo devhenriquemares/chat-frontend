@@ -8,6 +8,9 @@ export type InputTypes = "text" | "email" | "password"
   selector: 'app-input',
   templateUrl: './input.html',
   styleUrl: './input.css',
+  host: {
+    class: "w-full"
+  }
 })
 export class Input {
     type = input.required<InputTypes>()

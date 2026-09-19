@@ -3,8 +3,8 @@ import { IconCircleButton } from '../../components/icon-circle-button/icon-circl
 import { NgClass } from "../../../../node_modules/@angular/common/types/_common_module-chunk";
 import { ChatCard } from '../../components/chat-card/chat-card';
 import { signal } from '@angular/core'; 
-import { Chat } from '../../components/chat/chat';
-import { NewChat } from '../../components/new-chat/new-chat';
+import { NewChat } from '../new-chat/new-chat';
+import { Chat } from '../chat/chat';
 
 export type View = 'home' | 'chat' | 'new-chat';
 
@@ -30,5 +30,9 @@ export class Home {
     handleCloseChat() {
         this.selectedView.set('home');
         this.selectedID.set(null)
+    }
+
+    handleCloseNewChat() {
+        this.selectedView.set('home');
     }
 }
