@@ -1,4 +1,4 @@
-import { Component, effect, Injectable, input } from '@angular/core';
+import { Component, effect, Injectable, input, model } from '@angular/core';
 import { Input, InputTypes } from '../input/input';
 
 @Component({
@@ -23,4 +23,9 @@ export class FormInput {
     iconAlt = input<string>();
 
     error = input<string | null>();
+
+    text = model('')
+    onTextChange(newText: string) {
+        this.text.set(newText)
+    }
 }

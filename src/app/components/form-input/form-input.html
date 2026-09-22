@@ -3,7 +3,7 @@
         <div class="h-12 w-12 opacity-50 bg-[#fff] mask-no-repeat mask-contain" 
             [style.mask-image]="'url(' + iconSrc() + ')'">
         </div>
-        <app-input [type]="type()" [placeholder]="placeholder()" class="w-full"/>
+        <app-input [type]="type()" [placeholder]="placeholder()" class="w-full" [(text)]="text"/>
     </div>
     @if (error()) {
         <p class="text-xl text-red-500">{{ error() }}</p>

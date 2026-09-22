@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, input, model, output } from '@angular/core';
 import { twMerge } from 'tailwind-merge';
 
 export type InputTypes = "text" | "email" | "password"
@@ -30,4 +30,10 @@ export class Input {
         rounded-full`,
         this.customClass()
     )
+    
+    text = model("")
+    
+    onTextChange(newText: string) {
+        this.text.set(newText)
+    }
 }

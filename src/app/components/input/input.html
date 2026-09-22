@@ -1,1 +1,2 @@
-<textarea rows="1" [placeholder]="placeholder()" [class]="inputClass()"></textarea>
+<textarea #inputRef rows="1" [placeholder]="placeholder()" [class]="inputClass()"
+    [value]="text()" (input)="onTextChange(inputRef.value)"></textarea>
