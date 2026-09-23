@@ -1,7 +1,12 @@
+@if (cardMessage()) {
+    <notification-card class="right-5 top-5" 
+        (closeEmitter)="handleCardClose()"
+        [message]="cardMessage()"
+        [customClass]="success ? 'bg-green-500' : ''"/>
+}
+
 <div class="w-full h-full flex justify-center items-center">
-    <div class="
-        w-[85%] h-[85%] bg-purple rounded-[25px] relative overflow-hidden justify-center items-center flex
-    ">
+    <div class="w-[85%] h-[85%] bg-purple rounded-[25px] relative overflow-hidden justify-center items-center flex">
         <div class="z-0">
             <div class="
                 h-70 w-70 bg-(--background-color)
@@ -38,12 +43,12 @@
             <view-switcher class="flex-1" leftOption="Register" rightOption="Login" (leftClickEmitter)="handleLeftClick()" (rightClickEmitter)="handleRightClick()" [optionSelected]="optionSelected()"/>
             <div class="flex flex-3 flex-col justify-evenly">
                 @if (optionSelected() === "Left") {
-                    <form-input iconSrc="/icons/username_ic.svg" iconAlt="Username icon" type="text" placeholder="Username" [error]="errors().username" [(text)]="usernameText" />
-                    <form-input iconSrc="/icons/email_ic.svg" iconAlt="Email icon" type="email" placeholder="Email" [error]="errors().email" [(text)]="emailText" />
-                    <form-input iconSrc="/icons/password_ic.svg" iconAlt="Password icon" type="password" placeholder="Password" [error]="errors().password" [(text)]="passwordText"/>
+                    <form-input iconSrc="/icons/username_ic.svg" iconAlt="Username icon" type="text" placeholder="Username" [error]="fieldErrors().username" [(text)]="usernameText" />
+                    <form-input iconSrc="/icons/email_ic.svg" iconAlt="Email icon" type="email" placeholder="Email" [error]="fieldErrors().email" [(text)]="emailText" />
+                    <form-input iconSrc="/icons/password_ic.svg" iconAlt="Password icon" type="password" placeholder="Password" [error]="fieldErrors().password" [(text)]="passwordText"/>
                 } @else {
-                    <form-input iconSrc="/icons/email_ic.svg" iconAlt="Email icon" type="email" placeholder="Email" [(text)]="emailText" [error]="errors().email" />
-                    <form-input iconSrc="/icons/password_ic.svg" iconAlt="Password icon" type="password" placeholder="Password" [(text)]="passwordText" [error]="errors().password" />
+                    <form-input iconSrc="/icons/email_ic.svg" iconAlt="Email icon" type="email" placeholder="Email" [(text)]="emailText" [error]="fieldErrors().email" />
+                    <form-input iconSrc="/icons/password_ic.svg" iconAlt="Password icon" type="password" placeholder="Password" [(text)]="passwordText" [error]="fieldErrors().password" />
                 }
             </div>
             <div class="flex-1">
@@ -51,7 +56,7 @@
                         w-full p-3  text-5xl
                         rounded-full
                         cursor-pointer
-                        hover:shadow-[0_0_15px_10px_rgba(0,0,0,.1)]
+                        hover:shadow-[0_5px_10px_5px_rgba(0,0,0,.1)]
                         hover:bg-light-purple
                         transition duration-500">
                     {{ optionSelected() === "Left" ? 'Register' : 'Login' }}

@@ -1,43 +1,30 @@
 import { inject, Injectable } from '@angular/core';
 import { ApiService } from '../api/api.service';
-import { RegisterRequestDTO } from './dtos/register.request.dto';
-import { LoginRequesDTO } from './dtos/login.request.dto';
-import { AuthResponseDTO } from './dtos/auth.response.dto';
-import { ApiError, FieldError } from '../api/dtos/http.error';
-import { ApiErrorHandler } from '../../handlers/api-error.handler';
-import { HttpErrorResponse } from '@angular/common/http';
-import { firstValueFrom } from 'rxjs';
+import { RegisterRequestDTO } from '../../dtos/auth/register.request.dto';
+import { LoginRequesDTO } from '../../dtos/auth/login.request.dto';
+import { AuthResponseDTO } from '../../dtos/auth/auth.response.dto';
+import { TokenManager } from '../../managers/token/token.manager';
+import { HttpMethod } from '../../enums/api/http-method.enum';
+import { ApiResponseDTO } from '../../dtos/api/response.dto';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
     private apiService = inject(ApiService)
-    private apiErrorHandler = inject(ApiErrorHandler)
+    private tokenManager = inject(TokenManager)
 
-    async sendRegister(request: RegisterRequestDTO) {
-        // const response = await firstValueFrom(this.apiService.post<AuthResponseDTO>("auth/register", request))
-        //     .catch((error: HttpErrorResponse) => {
-        //         const apiError: ApiError = error.error
-        //         console.error(apiError)
+    async sendRegister(request: RegisterRequestDTO): Promise<ApiResponseDTO<AuthResponseDTO>> {
+        const result = await this.apiService.sendRequest<AuthResponseDTO>("auth/register", HttpMethod.POST, request)
+        result.success ? this.tokenManager.saveTokens(result.data!.tokens) : console.log(result.error)
 
-        //         if (if )
-        //     })
+        return result
     }
 
-    async sendLogin(request: LoginRequesDTO): Promise<AuthResponseDTO | FieldError[] | string | void> {
-        try {
-            const response = await firstValueFrom(this.apiService.post<AuthResponseDTO>("auth/login", request))
-            return response
-        } catch (error) {
-            const httpError = (error as HttpErrorResponse)
-            const apiError: ApiError = httpError.error
-            console.error(apiError)
+    async sendLogin(request: LoginRequesDTO): Promise<ApiResponseDTO<AuthResponseDTO>> {
+        const result = await this.apiService.sendRequest<AuthResponseDTO>("auth/login", HttpMethod.POST, request)
+        result.success ? this.tokenManager.saveTokens(result.data!.tokens) : console.log(result.error)
 
-            if (httpError.status === 400) {
-                if (apiError.errors.length > 0) return apiError.errors
-                return apiError.message
-            }
-        }
+        return result
     }
 }

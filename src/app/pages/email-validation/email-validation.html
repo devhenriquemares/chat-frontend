@@ -1,0 +1,60 @@
+<div class="w-full h-full flex justify-center items-center">
+    <div class="w-[85%] h-[85%] bg-purple rounded-[25px] relative overflow-hidden justify-center items-center flex">
+        <div class="z-0">
+            <div class="
+                h-70 w-70 bg-(--background-color)
+                rounded-full
+                absolute right-0 top-0
+                translate-x-[30%] translate-y-[-45%]
+                shadow-xl/30">
+            </div>
+            <div class="
+                h-45 w-45 bg-light-purple
+                rounded-full
+                absolute right-0 top-0
+                translate-x-[40%]
+                shadow-2xl/30">
+            </div>
+        </div>
+        <div class="z-0">
+            <div class="
+                h-70 w-70 bg-(--background-color)
+                rounded-full
+                absolute left-0 bottom-0
+                translate-y-[60%]
+                shadow-[0px_-25px_50px_-12px_rgba(0,0,0,0.25)]">
+            </div>
+            <div class="
+                h-45 w-45 bg-light-purple
+                rounded-full
+                absolute left-0 bottom-0
+                translate-x-[-20%] translate-y-[20%]
+                shadow-[0px_-25px_50px_-12px_rgba(0,0,0,0.25)]">
+            </div>
+        </div>
+        <div class="flex flex-col h-[85%] w-[85%] z-1">
+            <p class="flex-1 text-center text-white text-4xl">Insira o código único enviado ao seu email para continuar. O código irá expirar em 5 minutos</p>
+            <div class="flex-2 gap-5 flex flex-col">
+                <div class="flex w-full justify-center text-8xl gap-5">
+                    <div class="bg-white px-3 py-5 rounded-lg">{{ minutes() }}</div>
+                    <div class="bg-white px-3 py-5 rounded-lg">:</div>
+                    <div class="bg-white px-3 py-5 rounded-lg">{{ firstSecondsDigit() }}</div>
+                    <div class="bg-white px-3 py-5 rounded-lg">{{ secondSecondsDigit() }}</div>
+                </div>
+                <app-input placeholder="Insira o código único aqui"
+                    type="text"
+                    customClass="bg-white placeholder:text-[rgba(0,0,0,.4)] text-black"/>
+            </div>
+            <div class="flex-1 gap-6 flex flex-col">
+                <button class="cursor-pointer 
+                    bg-gray text-white
+                    w-full text-5xl 
+                    rounded-full py-3
+                    hover:shadow-[0_5px_10px_5px_rgba(0,0,0,.1)]
+                    hover:bg-light-purple
+                    transition duration-500">Confirmar</button>
+                <p class="text-white text-center text-4xl cursor-pointer">Enviar novamente</p>
+            </div>
+        </div>
+    </div>
+</div>

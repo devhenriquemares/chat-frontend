@@ -1,0 +1,30 @@
+.notification-card {
+    animation: fade-in 1.5s;
+}
+
+.notification-card.dismiss {
+    animation: fade-out 1.5s;
+    opacity: 0;
+}
+
+@keyframes fade-in {
+    from {
+        transform: translateY(-100%);
+        opacity: 0%;
+    }
+    to {
+        transform: translateY(0%);
+        opacity: 100%;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        transform: translateY(0%);
+        opacity: 100%;
+    }
+    to {
+        transform: translateY(-100%);
+        opacity: 0%;
+    }
+}

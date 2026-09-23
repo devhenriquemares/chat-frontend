@@ -1,0 +1,12 @@
+<div [ngClass]="cardClass()" 
+        [class.dismiss]="isDismissing"
+        (animationend)="onFinishAnimation()">
+    <div class="w-full flex justify-end">
+        <div (click)="onCloseClick()" 
+            class="
+            cursor-pointer
+            mask-no-repeat mask-contain 
+            h-10 w-10 bg-white" style="mask-image: url(/icons/reject_ic.svg)"></div>
+    </div>
+    <p class="text-xl text-white">{{ message() }}</p>
+</div>
