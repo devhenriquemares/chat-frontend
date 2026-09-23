@@ -1,3 +1,9 @@
+@if (notificationCardMessage()) {
+    <notification-card (closeEmitter)="handleNotificationDismiss()"
+        [message]="notificationCardMessage()" [customClass]="success() ? 'bg-green-500' : 'bg-red-500'" textCustomClass="text-3xl"
+        class="right-5 top-5"/>
+}
+
 <div class="w-full h-full flex justify-center items-center">
     <div class="w-[85%] h-[85%] bg-purple rounded-[25px] relative overflow-hidden justify-center items-center flex">
         <div class="z-0">
@@ -42,18 +48,19 @@
                     <div class="bg-white px-3 py-5 rounded-lg">{{ secondSecondsDigit() }}</div>
                 </div>
                 <app-input placeholder="Insira o código único aqui"
+                    [(text)]="uniqueCode"
                     type="text"
                     customClass="bg-white placeholder:text-[rgba(0,0,0,.4)] text-black"/>
             </div>
             <div class="flex-1 gap-6 flex flex-col">
-                <button class="cursor-pointer 
+                <button (click)="validateEmail()" class="cursor-pointer 
                     bg-gray text-white
                     w-full text-5xl 
                     rounded-full py-3
                     hover:shadow-[0_5px_10px_5px_rgba(0,0,0,.1)]
                     hover:bg-light-purple
                     transition duration-500">Confirmar</button>
-                <p class="text-white text-center text-4xl cursor-pointer">Enviar novamente</p>
+                <p (click)="resendEmailCode()" class="text-white text-center text-4xl cursor-pointer">Enviar novamente</p>
             </div>
         </div>
     </div>

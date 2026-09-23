@@ -1,7 +1,7 @@
 import { AccountProvidersEnum } from "../../enums/auth/account-providers";
 import { TokensDTO } from "./tokens.dto";
 
-interface UserResponseDTO {
+export interface UserResponseDTO {
     username: string,
     email: string,
     provider: AccountProvidersEnum,

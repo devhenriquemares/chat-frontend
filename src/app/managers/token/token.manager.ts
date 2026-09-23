@@ -1,6 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { TokensDTO } from "../../dtos/auth/tokens.dto";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { DecodedTokenDTO } from "../../dtos/auth/decoded-token.dto";
 
 @Injectable({ providedIn: 'root' })
 export class TokenManager {
@@ -11,11 +12,14 @@ export class TokenManager {
         localStorage.setItem("refresh-token", tokens.refreshToken)
     }
 
-    getAcessToken(): string {
-        return localStorage.getItem('access-token')!
+    getAcessToken(): string | null {
+        return localStorage.getItem('access-token') ?? null
     }
 
-    isVerified(token: string): boolean {
-        return this.jwtDecoder.decodeToken(token).isVerified
+    decode(token: string): DecodedTokenDTO {
+        const payload = this.jwtDecoder.decodeToken(token)
+        if (!payload) throw new Error("Invalid JWT token")
+
+        return payload
     }
 }

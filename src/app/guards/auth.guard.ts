@@ -7,8 +7,14 @@ export const authGuard: CanActivateFn = (route, state) => {
     const accessToken = tokenManager.getAcessToken()
     const router = inject(Router)
 
-    if (tokenManager.isVerified(accessToken)) return true
-
-    router.navigate(['/email-validation'], { queryParams: { redirected: true } })
-    return false
+    if (!accessToken) {
+        router.navigate(['/auth'])
+        return false
+    }
+    if (!tokenManager.decode(accessToken).isVerified) {
+        router.navigate(['/email-validation'], { queryParams: { redirected: true } })
+        return false
+    }
+    
+    return true
 }

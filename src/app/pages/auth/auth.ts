@@ -3,7 +3,6 @@ import { Options, ViewSwitcher } from "../../components/view-switcher/view-switc
 import { FormInput } from "../../components/form-input/form-input";
 import { AuthService } from "../../services/auth/auth.service";
 import { ApiError, FieldError } from "../../dtos/api/http.error";
-import { HttpStatusCode } from "@angular/common/http";
 import { NotificationCard } from "../../components/notification-card/notification-card";
 import { Router } from "@angular/router";
 import { ApiResponseDTO } from "../../dtos/api/response.dto";
@@ -53,6 +52,10 @@ export class Auth {
     handleCardClose() {
         this.cardMessage.set('')
         if (this.success) {
+            if (!this.authService.isUserEmailVerified()) {
+                this.router.navigate(['email-validation'])
+                return
+            }
             this.router.navigate(['home'])
         }
     }

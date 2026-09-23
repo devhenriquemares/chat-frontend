@@ -16,12 +16,17 @@ export class NotificationCard {
 
     message = input.required<string>()
     closeEmitter = output()
-    customClass = input<string>()
+    customClass = input<string>('')
+    textCustomClass = input<string>('')
     cardClass = () => twMerge(`
             notification-card
             min-w-50 max-w-xl p-4
             bg-red-500 rounded-xl
         `, this.customClass())
+
+    textClass = () => twMerge(`
+        text-xl text-white
+    `, this.textCustomClass())
 
     onCloseClick() {        
         this.isDismissing = true
