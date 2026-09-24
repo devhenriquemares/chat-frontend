@@ -15,32 +15,46 @@ export class AuthService {
     private apiService = inject(ApiService)
     private tokenManager = inject(TokenManager)
 
-    async sendRegister(request: RegisterRequestDTO): Promise<ApiResponseDTO<AuthResponseDTO>> {
-        const result = await this.apiService.sendRequest<AuthResponseDTO>("auth/register", HttpMethod.POST, request)
-        result.success ? this.tokenManager.saveTokens(result.data!.tokens) : console.log(result.error)
+    async sendRegister(body: RegisterRequestDTO): Promise<ApiResponseDTO<AuthResponseDTO>> {
+        const result = await this.apiService.sendRequest<AuthResponseDTO>({
+            url: "auth/register",
+            method: HttpMethod.POST,
+            body
+        })
+        if (result.success) this.tokenManager.saveTokens(result.data!.tokens)
 
         return result
     }
 
-    async sendLogin(request: LoginRequesDTO): Promise<ApiResponseDTO<AuthResponseDTO>> {
-        const result = await this.apiService.sendRequest<AuthResponseDTO>("auth/login", HttpMethod.POST, request)
-        result.success ? this.tokenManager.saveTokens(result.data!.tokens) : console.log(result.error)
+    async sendLogin(body: LoginRequesDTO): Promise<ApiResponseDTO<AuthResponseDTO>> {
+        const result = await this.apiService.sendRequest<AuthResponseDTO>({
+            url: "auth/login", 
+            method: HttpMethod.POST,
+            body
+        })
+        if (result.success) this.tokenManager.saveTokens(result.data!.tokens)
 
         return result
     }
 
     async resendEmailCode(): Promise<ApiResponseDTO<string>> {
-        const result = await this.apiService.sendRequest<string>("auth/email-code", HttpMethod.GET, null, true)
-        if (!result.success) console.log(result.error)
+        const result = await this.apiService.sendRequest<string>({
+            url: "auth/email-code",
+            method: HttpMethod.GET,
+            auth: true
+        })
 
         return result
     }
 
     async validateEmail(code: string): Promise<ApiResponseDTO<TokensDTO>> {
-        const result = await this.apiService.sendRequest<TokensDTO>("auth/email-code", HttpMethod.POST, { code }, true)
-
-        if (!result.success) console.log(result.error)
-        this.tokenManager.saveTokens(result.data!)
+        const result = await this.apiService.sendRequest<TokensDTO>({
+            url: "auth/email-code",
+            method: HttpMethod.POST,
+            body: { code },
+            auth: true
+        })
+        if (result.success) this.tokenManager.saveTokens(result.data!)
 
         return result
     }

@@ -1,3 +1,9 @@
+@if (notificationMessage()) {
+    <notification-card [message]="notificationMessage()"
+        class="right-5 top-5"
+        [customClass]="success() ? 'bg-green-500' : 'bg-red-500'"
+        (closeEmitter)="handleClose()" />
+}
 <div class="flex flex-col h-full w-full">
     <div class="bg-gray w-full flex items-center px-4">
         <icon-circle-button (click)="closeView()" iconSrc="/icons/back_ic.svg" buttonCustomClass="shadow-none hover:shadow-none hover:translate-y-0" (click)="closeView()"/>
@@ -7,14 +13,18 @@
     </div>
     <div class="flex-1 p-5 flex flex-col">
         @if (optionSelected() === "Left") {
-
+            @for (friendRequest of friendRequests(); track friendRequest.requestID) {
+                <friend-request-card cardType="accept-reject"
+                    [username]="friendRequest.requester.username"
+                    (acceptEmitter)="handleAccept(friendRequest.requestID)" />
+            }
         } @else {
             <div class="flex w-full gap-5 items-center">
                 <app-input [(text)]="searchUserID" type="text" placeholder="Digite o ID de um usuário" customClass="bg-white placeholder:text-[rgba(0,0,0,.5)] rounded-xl text-black"/>
                 <icon-circle-button (click)="handleSearchUser()" iconSrc="/icons/search_ic.svg" buttonCustomClass="shadow-none hover:shadow-none hover:translate-y-0"/>
             </div>
             @if (foundedUsername()) {
-                <friend-request-card cardType="send" [username]="foundedUsername()" />
+                <friend-request-card (sendEmitter)="handleSend()" cardType="send" [username]="foundedUsername()" />
             }
         }
     </div>

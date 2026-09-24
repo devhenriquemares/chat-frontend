@@ -7,6 +7,7 @@ import { NotificationCard } from "../../components/notification-card/notificatio
 import { Router } from "@angular/router";
 import { ApiResponseDTO } from "../../dtos/api/response.dto";
 import { AuthResponseDTO } from "../../dtos/auth/auth.response.dto";
+import { UserDataManager } from "../../managers/user/user-data.manager";
 
 export interface AuthErrors {
     username: string | null,
@@ -91,6 +92,7 @@ export class Auth {
 
         const { userResponse } = result.data!
         this.cardMessage.set(`Bem-vindo(a) ${userResponse.username}!`)
+        UserDataManager.saveData(userResponse)
     }
 
     private handleErrors(error: ApiError) {

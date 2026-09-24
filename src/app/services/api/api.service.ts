@@ -6,6 +6,7 @@ import { ApiResponseDTO } from "../../dtos/api/response.dto";
 import { HttpMethod } from "../../enums/api/http-method.enum";
 import { ApiError } from "../../dtos/api/http.error";
 import { TokenManager } from "../../managers/token/token.manager";
+import { ApiRequestDTO } from "../../dtos/api/request.dto";
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +16,7 @@ export class ApiService {
     private httpClient = inject(HttpClient)
     private tokenManager = inject(TokenManager)
 
-    async sendRequest<T>(url: string, method: HttpMethod, body: any = {}, auth: boolean = false): Promise<ApiResponseDTO<T>> {
+    async sendRequest<T>({ url, method, auth = false, body = {} }: ApiRequestDTO): Promise<ApiResponseDTO<T>> {
         const handledUrl = `${this.baseUrl}/${this.handleUrl(url)}`
         let result: Observable<T> = new Observable()
         const headers = auth ? 
@@ -38,7 +39,10 @@ export class ApiService {
             const response = await firstValueFrom(result)
             return { success: true, data: response }
         } catch (error: any) {
-            return { success: false, error: (error.error) as ApiError }
+            const apiError: ApiError = error.error
+            console.error(apiError)
+
+            return { success: false, error: apiError }
         }
     }
 

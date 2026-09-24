@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { twMerge } from 'tailwind-merge';
 
 @Component({
@@ -25,16 +25,11 @@ export class NotificationCard {
         `, this.customClass())
 
     textClass = () => twMerge(`
-        text-xl text-white
+        text-2xl text-white
     `, this.textCustomClass())
 
-    onCloseClick() {        
-        this.isDismissing = true
-    }
-    
     onFinishAnimation() {
-        if (this.isDismissing) {
-            this.closeEmitter.emit()
-        }
+        this.isDismissing = !this.isDismissing
+        if (!this.isDismissing) this.closeEmitter.emit()
     }
 }

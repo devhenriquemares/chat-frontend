@@ -2,10 +2,10 @@
     <p>{{ username() }}</p>
     <div class="flex gap-5">
         @if (cardType() === "accept-reject") {
-            <icon-circle-button iconSrc="./icons/accept_ic.svg" buttonCustomClass="w-20 h-20 shadow-none hover:translate-none hover:shadow-none bg-purple hover:bg-light-purple"/>
-            <icon-circle-button iconSrc="./icons/reject_ic.svg" buttonCustomClass="w-20 h-20 shadow-none hover:translate-none hover:shadow-none bg-purple hover:bg-light-purple"/>
+            <icon-circle-button (click)="onAcceptClick()" iconSrc="./icons/accept_ic.svg" buttonCustomClass="w-20 h-20 shadow-none hover:translate-none hover:shadow-none bg-purple hover:bg-light-purple"/>
+            <icon-circle-button (click)="onRejectClick()" iconSrc="./icons/reject_ic.svg" buttonCustomClass="w-20 h-20 shadow-none hover:translate-none hover:shadow-none bg-purple hover:bg-light-purple"/>
         } @else {
-            <icon-circle-button iconSrc="./icons/send_ic.svg" buttonCustomClass="w-20 h-20 shadow-none hover:translate-none hover:shadow-none bg-purple hover:bg-light-purple"/>
+            <icon-circle-button (click)="onSendClick()" iconSrc="./icons/send_ic.svg" buttonCustomClass="w-20 h-20 shadow-none hover:translate-none hover:shadow-none bg-purple hover:bg-light-purple"/>
         }
     </div>
 </div>
