@@ -10,5 +10,5 @@ export class ChatCard {
     selected = input(false);
     select = output<void>();
     username = input.required<string>()
-    lastMessage = input.required<string>()
+    lastMessage = input<string>('')
 }

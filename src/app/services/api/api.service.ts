@@ -14,13 +14,12 @@ import { ApiRequestDTO } from "../../dtos/api/request.dto";
 export class ApiService {
     private baseUrl = environment.apiUrl
     private httpClient = inject(HttpClient)
-    private tokenManager = inject(TokenManager)
 
     async sendRequest<T>({ url, method, auth = false, body = {} }: ApiRequestDTO): Promise<ApiResponseDTO<T>> {
         const handledUrl = `${this.baseUrl}/${this.handleUrl(url)}`
         let result: Observable<T> = new Observable()
         const headers = auth ? 
-            new HttpHeaders().set('Authorization', `Bearer ${this.tokenManager.getAcessToken() ?? ""}`)
+            new HttpHeaders().set('Authorization', `Bearer ${TokenManager.getAcessToken() ?? ""}`)
             : {}
 
         switch (method) {

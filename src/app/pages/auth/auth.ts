@@ -100,7 +100,7 @@ export class Auth {
             this.cardMessage.set("Email ou senha incorretos")
         } else if (error.code === "EMAIL_ALREADY_EXISTS") {
             this.cardMessage.set("Email já cadastrado no sistema")
-        } else if (error.errors.length > 0) { 
+        } else if (error.errors && error.errors.length > 0) { 
             this.handleFieldErrors(error.errors)
         } else {
             this.cardMessage.set('Alguma coisa deu errado, tente novamente mais tarde')

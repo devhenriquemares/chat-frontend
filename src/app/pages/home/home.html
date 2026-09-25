@@ -3,8 +3,13 @@
         shadow-[10px_0px_10px_0px_rgba(0,0,0,.2)]">
         <div class="bg-gray mx-3 my-3 text-white text-3xl rounded-lg p-3">{{ username }}</div>
         <div class="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-light-purple flex-1 p-5 flex flex-col gap-5">
-            @for (chat of chats(); track chat.chatID) {
-                <chat-card lastMessage="todo" [username]="chat.friend.username" />
+            @if (chats()) {
+                @for (chat of chats(); track chat.chatID) {
+                    <chat-card [lastMessage]="chat.messages[chat.messages.length]?.message"
+                        [username]="chat.friend.username"
+                        [selected]="selectedChat()?.chatID == chat.chatID"
+                        (select)="selectChat(chat)" />
+                }
             }
         </div>
         <icon-circle-button (click)="newChat()" iconSrc="/icons/add_chat_ic.svg" class="absolute bottom-0 right-0" buttonCustomClass="hover:bg-light-purple mr-3 mb-5"/>
@@ -13,9 +18,12 @@
         @if (selectedView() == 'home') {
             <img src="./icons/home_background_ic.svg" class="h-[75%] self-center m-auto"/>
         } @else if (selectedView() === 'chat') {
-            <chat [chatID]="selectedID()!" class="w-full h-full" (closeChatEmitter)="handleCloseChat()"/>
+            <chat [username]="selectedChat()!.friend.username"
+                class="w-full h-full"
+
+                (closeChatEmitter)="handleCloseChat() "/>
         } @else if (selectedView() === 'new-chat') {
-            <new-chat (closeViewEmmiter)="handleCloseNewChat()"/>
+            <new-chat (closeViewEmmiter)="handleCloseNewChat()" />
         }
     </div>
 </div>

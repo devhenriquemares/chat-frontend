@@ -20,7 +20,7 @@ export type View = 'home' | 'chat' | 'new-chat';
 export class Home implements OnInit {
     private chatService = inject(ChatService)
     selectedView = signal<View>('home');
-    selectedID = signal<number | null>(null);
+    selectedChat = signal<ChatResponseDTO | null>(null)
     chats = signal<ChatResponseDTO[]>([])
     username = UserDataManager.getData().username
 
@@ -30,13 +30,8 @@ export class Home implements OnInit {
 
     async loadChats() {
         const result = await this.chatService.loadChats()
-        console.log(result)
         if (result.success) this.chats.set(result.data!)
-    }
-
-    selectChat(chatID: number) {
-        this.selectedView.set('chat');
-        this.selectedID.set(chatID);
+            console.log(result.data)
     }
 
     newChat() {
@@ -45,10 +40,15 @@ export class Home implements OnInit {
 
     handleCloseChat() {
         this.selectedView.set('home');
-        this.selectedID.set(null)
+        this.selectedChat.set(null)
     }
 
     handleCloseNewChat() {
         this.selectedView.set('home');
+    }
+
+    selectChat(chat: ChatResponseDTO) {
+        this.selectedView.set('chat')
+        this.selectedChat.set(chat)
     }
 }

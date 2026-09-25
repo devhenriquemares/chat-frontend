@@ -10,8 +10,10 @@ import { Input } from '../../components/input/input';
   styleUrl: './chat.css',
 })
 export class Chat {
-    chatID = input.required<number>()
+    // chatID = input.required<number>()
     closeChatEmitter = output()
+    username = input.required<string>()
+
     closeChat() {
         this.closeChatEmitter.emit()
     }
