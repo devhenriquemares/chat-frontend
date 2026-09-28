@@ -8,6 +8,8 @@ import { Chat } from '../chat/chat';
 import { ChatResponseDTO } from '../../dtos/chat/chat-response.dto';
 import { ChatService } from '../../services/chat/chat.service';
 import { UserDataManager } from '../../managers/user/user-data.manager';
+import { SendMessageDTO } from '../../dtos/message/send-message.dto';
+import { MessageResponseDTO } from '../../dtos/message/message-response.dto';
 
 export type View = 'home' | 'chat' | 'new-chat';
 
@@ -31,7 +33,6 @@ export class Home implements OnInit {
     async loadChats() {
         const result = await this.chatService.loadChats()
         if (result.success) this.chats.set(result.data!)
-            console.log(result.data)
     }
 
     newChat() {
@@ -50,5 +51,13 @@ export class Home implements OnInit {
     selectChat(chat: ChatResponseDTO) {
         this.selectedView.set('chat')
         this.selectedChat.set(chat)
+    }
+
+    updateLastMessage(lastMessage: MessageResponseDTO) {
+        this.chats.update(currentChats => currentChats.map(chat =>
+            chat.chatID === this.selectedChat()!.chatID ?
+                { ...chat, messages: [ ...chat.messages, lastMessage ] }
+                : chat
+        ))
     }
 }
