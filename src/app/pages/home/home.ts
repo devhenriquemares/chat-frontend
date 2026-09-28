@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { IconCircleButton } from '../../components/icon-circle-button/icon-circle-button';
-import { NgClass } from "../../../../node_modules/@angular/common/types/_common_module-chunk";
 import { ChatCard } from '../../components/chat-card/chat-card';
 import { signal } from '@angular/core'; 
 import { NewChat } from '../new-chat/new-chat';
@@ -10,12 +9,13 @@ import { ChatService } from '../../services/chat/chat.service';
 import { UserDataManager } from '../../managers/user/user-data.manager';
 import { SendMessageDTO } from '../../dtos/message/send-message.dto';
 import { MessageResponseDTO } from '../../dtos/message/message-response.dto';
+import { NgClass } from '@angular/common';
 
 export type View = 'home' | 'chat' | 'new-chat';
 
 @Component({
   selector: 'home',
-  imports: [IconCircleButton, ChatCard, Chat, NewChat],
+  imports: [IconCircleButton, ChatCard, Chat, NewChat, NgClass],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -25,6 +25,7 @@ export class Home implements OnInit {
     selectedChat = signal<ChatResponseDTO | null>(null)
     chats = signal<ChatResponseDTO[]>([])
     username = UserDataManager.getData().username
+    isSidebarOpen = signal<boolean>(true)
 
     ngOnInit(): void {
         this.loadChats()
@@ -59,5 +60,9 @@ export class Home implements OnInit {
                 { ...chat, messages: [ ...chat.messages, lastMessage ] }
                 : chat
         ))
+    }
+
+    switchSidebarStatus() {
+        this.isSidebarOpen.set(!this.isSidebarOpen())
     }
 }

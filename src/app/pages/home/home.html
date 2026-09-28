@@ -1,18 +1,25 @@
 <div class="flex h-full w-full">
-    <div class="w-120 h-full bg-dark-purple relative
+    <div [ngClass]="isSidebarOpen() ? 'w-120' : '' " class="h-full bg-dark-purple relative
         shadow-[10px_0px_10px_0px_rgba(0,0,0,.2)]">
-        <div class="bg-gray mx-3 my-3 text-white text-3xl rounded-lg p-3">{{ username }}</div>
-        <div class="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-light-purple flex-1 p-5 flex flex-col gap-5">
-            @if (chats()) {
-                @for (chat of chats(); track chat.chatID) {
-                    <chat-card [username]="chat.friend.username"
-                        [selected]="selectedChat()?.chatID == chat.chatID"
-                        (select)="selectChat(chat)"
-                        [lastMessage]="chat.messages[chat.messages.length - 1]?.message ?? ''" />
+        @if (isSidebarOpen()) {
+            <div class="flex relative items-center">
+                <div class="bg-gray mx-3 my-3 flex-5 text-white text-3xl rounded-lg p-3">{{ username }}</div>
+                <div (click)="switchSidebarStatus()" class="cursor-pointer mask-contain mask-no-repeat h-15 flex-1 bg-white" [style.mask-image]="'url(icons/minimize_ic.svg)'"></div>
+            </div>
+            <div class="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-light-purple flex-1 p-5 flex flex-col gap-5">
+                @if (chats()) {
+                    @for (chat of chats(); track chat.chatID) {
+                        <chat-card [username]="chat.friend.username"
+                            [selected]="selectedChat()?.chatID == chat.chatID"
+                            (select)="selectChat(chat)"
+                            [lastMessage]="chat.messages[chat.messages.length - 1]?.message ?? ''" />
+                    }
                 }
-            }
-        </div>
-        <icon-circle-button (click)="newChat()" iconSrc="/icons/add_chat_ic.svg" class="absolute bottom-0 right-0" buttonCustomClass="hover:bg-light-purple mr-3 mb-5"/>
+            </div>
+            <icon-circle-button (click)="newChat()" iconSrc="/icons/add_chat_ic.svg" class="absolute bottom-0 right-0" buttonCustomClass="hover:bg-light-purple mr-3 mb-5"/>
+        } @else {
+            <div (click)="switchSidebarStatus()" class=" w-15 mx-4 mt-3 cursor-pointer mask-contain mask-no-repeat h-15 flex-1 bg-white" [style.mask-image]="'url(icons/maximize_ic.svg)'"></div>
+        }
     </div>
     <div class="h-full flex-1 flex">
         @if (selectedView() == 'home') {
